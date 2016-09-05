@@ -19,9 +19,6 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
-    /*
-    * create database
-    * create database inventory_management; */
     @Autowired
     private ApplicationContext appContext;
 

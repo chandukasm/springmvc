@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * Created by sazzad on 2/11/16.
+ * Created by sazzad on 2/11/16
  */
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
