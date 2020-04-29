@@ -26,7 +26,7 @@ public class DatabaseConfig {
 
     @Bean(name = "DataSource")
     public HikariDataSource dataSourceWinMacLinux() {
-        return getDataSource("127.0.0.1","root","123456");
+        return getDataSource("127.0.0.1","chanduka","eleos");
     }
 
 
