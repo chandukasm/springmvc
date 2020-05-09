@@ -1,6 +1,9 @@
 package com.lynas.config;
 
 import com.lynas.model.AppUser;
+import com.lynas.model.City;
+import com.lynas.model.Hotel;
+import com.lynas.model.Laptop;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,15 +26,13 @@ public class DatabaseConfig {
     private ApplicationContext appContext;
 
 
-
     @Bean(name = "DataSource")
     public HikariDataSource dataSourceWinMacLinux() {
-        return getDataSource("127.0.0.1","chanduka","eleos");
+        return getDataSource("127.0.0.1", "root", "");
     }
 
 
-
-    private HikariDataSource getDataSource(String serverName, String user, String password){
+    private HikariDataSource getDataSource(String serverName, String user, String password) {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
         dataSource.addDataSourceProperty("databaseName", "test");
@@ -51,18 +52,18 @@ public class DatabaseConfig {
     }
 
     @Bean
-    public LocalSessionFactoryBean hibernate5SessionFactoryBean(){
+    public LocalSessionFactoryBean hibernate5SessionFactoryBean() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource((DataSource) appContext.getBean("DataSource"));
         localSessionFactoryBean.setAnnotatedClasses(
-                AppUser.class
+                AppUser.class, Laptop.class, City.class, Hotel.class
         );
 
         Properties properties = new Properties();
-        properties.put("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         //properties.put("hibernate.current_session_context_class","thread");
-        properties.put("hibernate.hbm2ddl.auto","update");
-        properties.put("hibernate.show_sql","true");
+        properties.put("hibernate.hbm2ddl.auto", "create");
+        properties.put("hibernate.show_sql", "true");
 
         localSessionFactoryBean.setHibernateProperties(properties);
         return localSessionFactoryBean;

@@ -6,23 +6,38 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by sazzad on 2/11/16
  */
 @Entity
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+
 public @Data class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false, unique = true)
+
+    @Column(nullable = false)
     private String userName;
+
     @Column(nullable = false)
     private String password;
 
+    @OneToOne
+    private  Laptop laptop;
+
+    public AppUser() {
+    }
+
+
+
+    public AppUser( String name,String password) {
+
+        this.userName = name;
+        this.password = password;
+    }
 
 
     public int getId() {
